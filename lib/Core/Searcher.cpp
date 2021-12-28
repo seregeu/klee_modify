@@ -532,7 +532,7 @@ ExecutionState &InterleavedSearcher::selectState() {
   if (index == 0) index = searchers.size();
   return s->selectState();
 }
-
+ 
 void InterleavedSearcher::update(ExecutionState *current,
                                  const std::vector<ExecutionState *> &addedStates,
                                  const std::vector<ExecutionState *> &removedStates) {

@@ -434,7 +434,7 @@ cl::opt<bool> DebugCheckForImpliedValues(
 
 // XXX hack
 extern "C" unsigned dumpStates, dumpPTree;
-unsigned dumpStates = 0, dumpPTree = 0;
+unsigned dumpStates = 1, dumpPTree = 1;
 
 const char *Executor::TerminateReasonNames[] = {
   [ Abort ] = "abort",
@@ -1204,7 +1204,7 @@ Executor::fork(ExecutionState &current, ref<Expr> condition, bool isInternal) {
         falseState->symPathOS << "0";
       }
     }
-
+ // glyanyt6, ne tyt li v cache dobavlyaetsa znachenie
     addConstraint(*trueState, condition);
     addConstraint(*falseState, Expr::createIsZero(condition));
 
@@ -3502,7 +3502,7 @@ bool Executor::checkMemoryUsage() {
   // randomly select states for early termination
   std::vector<ExecutionState *> arr(states.begin(), states.end()); // FIXME: expensive
   for (unsigned i = 0, N = arr.size(); N && i < toKill; ++i, --N) {
-    unsigned idx = theRNG.getInt32() % N;
+    unsigned idx = theRNG.getInt321() % N;
     // Make two pulls to try and not hit a state that
     // covered new code.
     if (arr[idx]->coveredNew)
